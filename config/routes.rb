@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  resources :products, only: [:create, :show, :index, :update, :destroy], defaults: { format: :json }
+
+  scope 'products/:product_id', module: :products do
+    resources :variants, only: [:create, :show, :index, :update, :destroy], defaults: { format: :json }
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

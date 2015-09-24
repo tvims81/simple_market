@@ -1,0 +1,45 @@
+class ProductsController < ApplicationController
+  before_action :set_product, only: [:show, :update, :destroy]
+
+  def create
+    @product = Product.new(product_params)
+
+    if @product.save
+      render :show, status: :created
+    else
+      render_ue_error(@product)
+    end
+  end
+
+  def show
+  end
+
+  def index
+    @products = Product.all
+    @total = @products.count
+  end
+
+  def update
+    if @product.update(product_params)
+      render :show
+    else
+      render_ue_error(@product)
+    end
+  end
+
+  def destroy
+    @product.destroy
+    render nothing: true
+  end
+
+  private
+
+  def set_product
+    @product = Product.find_by_id(params[:id]) || render_not_found_error
+  end
+
+  def product_params
+    params.permit(:name, :description, :category_name)
+  end
+
+end
