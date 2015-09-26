@@ -1,4 +1,5 @@
 class Products::VariantsController < Products::ApplicationController
+	before_action :set_variant, only: [:show, :update]
 
   def create
     @variant = Product::Variant.new(variant_params)
@@ -12,14 +13,21 @@ class Products::VariantsController < Products::ApplicationController
   end
 
   def show
-  	@variant = Product::Variant.find_by_id(params[:id]) || render_not_found_error
-
   end
 
   def index  	
   	@variants = product.variants
   	@total = @variants.count
   end
+
+  def update
+  	if @variant.update(variant_params)
+  		render :show
+  	else
+  		render_ue_error(@variant)
+  	end
+  end
+
 
 
 
@@ -35,6 +43,10 @@ class Products::VariantsController < Products::ApplicationController
   	def variant_params
     	{ price: params[:price], properties: params[:properties] }
     	#params.permit(:price, properties: params[:properties])
+  	end
+
+  	def set_variant
+  		@variant = Product::Variant.find_by_id(params[:id]) || render_not_found_error
   	end
   
 

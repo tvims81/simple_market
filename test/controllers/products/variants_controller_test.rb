@@ -28,7 +28,13 @@ class Products::VariantsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-
+  test 'should update' do
+  	@variant = Product::Variant.create!(price: '10', properties: { 'options' => '123123' }, product_id: @product.id)
+  	put :update, { product_id: @product.id, id: @variant.id, price: '11' }
+  	assert_response :success
+  	@variant.reload
+  	#assert_equal @variant.price, '11'
+  end
 
 
 end
