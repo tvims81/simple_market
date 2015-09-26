@@ -5,12 +5,13 @@ class Products::VariantsControllerTest < ActionController::TestCase
   end
 
   test 'should create' do
-  	post :create, { price: '10', properties:{ 'Цвет' => 'красный' }, product_id: @product.id }
+  	post :create, { price: '10', properties: {'Цвет' => "красный"}, product_id: @product.id }
   	assert_response :created
+  	assert_not_nil assigns(:variant)[:properties]['Цвет']
   end
 
   test 'should show' do
-  	@variant = Product::Variant.create!(price: '10', properties:{ 'Цвет' => 'красный' }, product_id: @product.id)
+  	@variant = Product::Variant.create!(price: '10', properties: {'Цвет' => 'красный'}, product_id: @product.id)
   	get :show, { product_id: @product.id, id: @variant.id }
   	assert_response :success
 
