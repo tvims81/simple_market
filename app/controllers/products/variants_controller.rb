@@ -38,8 +38,8 @@ class Products::VariantsController < Products::ApplicationController
   private
 
   	def variant_params
-    	{ price: params[:price], properties: params[:properties] }
-    	#params.permit(:price, properties: params[:properties])
+    	#{ price: params[:price], properties: params[:properties] }
+    	params.permit(:price, properties: params[:properties].try(:keys))
   	end
 
   	def set_variant

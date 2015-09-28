@@ -1,4 +1,4 @@
 class Product::Variant < ActiveRecord::Base
-  validates :price, presence: true
+  validates :price, :product_id, presence: true
   belongs_to :product
 end

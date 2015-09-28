@@ -41,9 +41,9 @@ class Products::VariantsControllerTest < ActionController::TestCase
   	assert_equal @variant.price, 11
   end
 
-  test 'shoul not update wirh validation failures' do
+  test 'should not update with validation failures' do
   	@variant = Product::Variant.create!(price: 10, properties: { 'options' => '123123' }, product_id: @product.id)
-  	put :update, { product_id: @product.id, id: @variant.id }
+  	put :update, { product_id: @product.id, id: @variant.id, price: '' }
   	assert_response :unprocessable_entity
   end
 
