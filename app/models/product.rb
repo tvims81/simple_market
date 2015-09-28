@@ -1,4 +1,5 @@
 class Product < ActiveRecord::Base
-  validates :name, :description, :category_name, presence: true
+  validates :name, :description, :category_id, presence: true
   has_many :variants
+  belongs_to :categoies
 end

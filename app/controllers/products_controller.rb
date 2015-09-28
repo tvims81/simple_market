@@ -20,7 +20,7 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if @product.update(product_params)
+    if @product.update(product_params) && !product_params[:category_id]
       render :show
     else
       render_ue_error(@product)
@@ -39,7 +39,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.permit(:name, :description, :category_name)
+    params.permit(:name, :description, :category_id)
   end
 
 end

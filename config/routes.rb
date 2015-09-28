@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :variants, only: [:create, :show, :index, :update, :destroy], defaults: { format: :json }
   end
 
+  resources :categories, only: [:index], defaults: { format: :json }
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

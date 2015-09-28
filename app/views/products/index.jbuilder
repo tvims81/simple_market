@@ -3,5 +3,5 @@ json.meta do
 end
 
 json.data @products do |product|
-  json.extract! product, :id, :name, :category_name, :description
+  json.extract! product, :id, :name, :description, :category_id
 end
