@@ -35,7 +35,7 @@ class ProductsController < ApplicationController
   private
 
   def set_product
-    @product = Product.find_by_id(params[:id]) || render_not_found_error
+    @product = Product.find_by_id(params[:id]) || raise(ResourceNotFoundError.new)
   end
 
   def product_params

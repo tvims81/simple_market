@@ -1,5 +1,5 @@
 class Products::VariantsController < Products::ApplicationController
-	before_action :set_variant, only: [:show, :update]
+	before_action :set_variant, only: [:show, :update, :destroy]
 
   def create
     @variant = Product::Variant.new(variant_params)
@@ -28,13 +28,10 @@ class Products::VariantsController < Products::ApplicationController
   	end
   end
 
-
-
-
-
-
-
-
+  def destroy
+  	@variant.destroy
+  	render nothing: true
+  end
 
 
 
@@ -46,7 +43,7 @@ class Products::VariantsController < Products::ApplicationController
   	end
 
   	def set_variant
-  		@variant = Product::Variant.find_by_id(params[:id]) || render_not_found_error
+  		@variant = product.variants.find_by_id(params[:id]) || raise(ResourceNotFoundError.new)
   	end
   
 
