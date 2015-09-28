@@ -45,7 +45,6 @@ class Products::VariantsControllerTest < ActionController::TestCase
   test 'should not update with validation failures' do
   	@variant = Product::Variant.create!(price: 10, properties: { 'options' => '123123' }, product_id: @product.id)
   	put :update, { product_id: @product.id, id: @variant.id, price: '' }
-  	p response.body
   	assert_response :unprocessable_entity
   end
 

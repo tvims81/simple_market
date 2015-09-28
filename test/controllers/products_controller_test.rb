@@ -46,6 +46,7 @@ class ProductsControllerTest < ActionController::TestCase
     @category2 = Category.create!(name: "test2")
     put :update, { id: @product.id, category_id: @category2.id } 
     assert_response :unprocessable_entity
+    assert_equal @product.category, @category
   end
 
   test 'should destroy' do
